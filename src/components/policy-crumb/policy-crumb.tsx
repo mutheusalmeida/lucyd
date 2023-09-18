@@ -6,31 +6,37 @@ import {
   EditablePreview,
 } from '@ark-ui/react'
 import { useParams } from 'react-router-dom'
+import { DecisionDialog } from '../decision-dialog'
+import { Loading } from '../loading'
 
 export const PolicyCrumb = () => {
   const { policyId } = useParams()
   const { data, isLoading } = useGetPolicyQuery(policyId!)
   const [editPolicy] = useEditPolicyMutation()
 
-  if (isLoading) return <div>Loading...</div>
+  if (isLoading) return <Loading />
 
   const handleSubmit = (value: string) => {
     editPolicy({ id: policyId!, body: { name: value } })
   }
 
   return (
-    <Editable
-      defaultValue={data?.name}
-      placeholder="Type a name"
-      activationMode="dblclick"
-      maxLength={100}
-      onSubmit={(e) => handleSubmit(e.value)}
-      submitMode="both"
-    >
-      <EditableArea>
-        <EditableInput className="bg-[inherit] text-white" />
-        <EditablePreview />
-      </EditableArea>
-    </Editable>
+    <div className="flex items-center gap-3">
+      <Editable
+        defaultValue={data?.name}
+        placeholder="Type a name"
+        activationMode="dblclick"
+        maxLength={100}
+        onSubmit={(e) => handleSubmit(e.value)}
+        submitMode="both"
+      >
+        <EditableArea>
+          <EditableInput className="w-32 bg-[inherit] text-white" />
+          <EditablePreview />
+        </EditableArea>
+      </Editable>
+
+      <DecisionDialog />
+    </div>
   )
 }

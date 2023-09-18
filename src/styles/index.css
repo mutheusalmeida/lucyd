@@ -6,6 +6,7 @@ html,
 body,
 [data-js='root'] {
   height: 100%;
+  overflow: hidden;
 }
 
 body {
@@ -16,13 +17,44 @@ body {
   font-size: 100%;
 }
 
-button {
-  @apply appearance-none;
-  @apply outline-none;
-  @apply cursor-default;
+@layer base {
+  button {
+    @apply appearance-none;
+    @apply outline-none;
+    @apply cursor-default;
+  }
+
+  a {
+    @apply no-underline;
+    @apply cursor-default;
+  }
+
+  * {
+    --sb-track-color: #2c2c2c;
+    --sb-thumb-color: #444444;
+    --sb-size: 14px;
+
+    scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+  }
+
+  *::-webkit-scrollbar {
+    width: var(--sb-size);
+    height: var(--sb-size);
+  }
+
+  *::-webkit-scrollbar-track {
+    background-color: var(--sb-track-color);
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: var(--sb-thumb-color);
+    border-radius: var(--sb-size);
+    border: 4px solid var(--sb-track-color);
+  }
 }
 
-a {
-  @apply no-underline;
-  @apply cursor-default;
+@layer components {
+  .decision-shape {
+    transform: rotateX(45deg) rotateZ(45deg);
+  }
 }

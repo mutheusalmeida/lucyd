@@ -9,7 +9,7 @@ export const MainLayout = () => {
 
       <Header />
 
-      <main className="col-[2_/_3] row-[2]">
+      <main className="col-[2_/_3] row-[2] overflow-auto">
         <Outlet />
       </main>
     </div>

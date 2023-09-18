@@ -9,6 +9,7 @@ declare module 'policies' {
     id: number
     variable: string
     value: string
+    comparison_operator: 'EQ' | 'LT' | 'LTE' | 'GT' | 'GTE'
     else_block: boolean
     then_block: boolean
   }
