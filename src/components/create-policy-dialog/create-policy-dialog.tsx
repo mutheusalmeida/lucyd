@@ -46,7 +46,7 @@ export const CreatePolicyDialog = () => {
     >
       <DialogTrigger asChild>
         <button className="flex h-full w-full items-center justify-center">
-          <PlusIcon className="h-14 w-14 text-white/70" />
+          <PlusIcon className="h-10 w-10 text-white/70" />
         </button>
       </DialogTrigger>
 

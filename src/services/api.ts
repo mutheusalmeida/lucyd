@@ -48,6 +48,14 @@ export const api = createApi({
         }
       },
     }),
+    deletePolicy: build.mutation<void, { id: number }>({
+      query: ({ id }) => {
+        return {
+          url: `/policies/${id}`,
+          method: 'DELETE',
+        }
+      },
+    }),
   }),
 })
 
@@ -57,4 +65,5 @@ export const {
   useEditPolicyMutation,
   useExecutePolicyMutation,
   useCreatePolicyMutation,
+  useDeletePolicyMutation,
 } = api
