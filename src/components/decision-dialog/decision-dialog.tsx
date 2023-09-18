@@ -28,12 +28,11 @@ export const DecisionDialog = () => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    const form = e.target as HTMLFormElement
 
     const formData = policy?.if_statements
       .map(({ variable }) => {
-        const input = e.target[
-          variable as keyof typeof e.target
-        ] as unknown as HTMLInputElement
+        const input = form[variable] as unknown as HTMLInputElement
 
         return {
           [variable]: input.value,
@@ -48,6 +47,7 @@ export const DecisionDialog = () => {
           body: formData,
         }).unwrap()
         setDecision(payload)
+        form.reset()
       } catch (error) {
         console.error('rejected', error)
       }

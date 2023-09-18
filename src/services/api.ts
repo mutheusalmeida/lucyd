@@ -36,6 +36,18 @@ export const api = createApi({
         }
       },
     }),
+    createPolicy: build.mutation<
+      PolicyType,
+      { body: Pick<PolicyType, 'name'> }
+    >({
+      query: ({ body }) => {
+        return {
+          url: '/policies',
+          method: 'POST',
+          body,
+        }
+      },
+    }),
   }),
 })
 
@@ -44,4 +56,5 @@ export const {
   useGetPolicyQuery,
   useEditPolicyMutation,
   useExecutePolicyMutation,
+  useCreatePolicyMutation,
 } = api

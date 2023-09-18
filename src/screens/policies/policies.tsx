@@ -1,4 +1,5 @@
 import { Loading } from '@/components/loading'
+import { CreatePolicyDialog } from '@/create-policy-dialog'
 import { useGetPoliciesQuery } from '@/services/api'
 import { Link } from 'react-router-dom'
 
@@ -9,6 +10,10 @@ export const Policies = () => {
 
   return (
     <div className="grid grid-cols-[repeat(auto-fill,_minmax(176px,_1fr))] gap-3 p-5">
+      <div className="aspect-square h-full w-full rounded border border-black-100 p-5 transition-[background-color] duration-75 ease-linear hover:bg-black-50">
+        <CreatePolicyDialog />
+      </div>
+
       {data?.content.map(({ id, name }) => (
         <Link to={`/policies/${id}`} key={id}>
           <div className="aspect-square h-full w-full rounded border border-black-100 p-5 transition-[background-color] duration-75 ease-linear hover:bg-black-50">
