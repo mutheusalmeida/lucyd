@@ -20,7 +20,11 @@ import { DecisionType } from 'policies'
 import { FormEvent, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
-export const DecisionDialog = () => {
+type DecisionDialogProps = {
+  disabled: boolean
+}
+
+export const DecisionDialog = ({ disabled }: DecisionDialogProps) => {
   const { policyId } = useParams()
   const policy = useTypedSelector(selectPolicy)
   const [executePolicy, { isLoading }] = useExecutePolicyMutation()
@@ -57,7 +61,10 @@ export const DecisionDialog = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <button className="bg-purple-400 hover:bg-purple-400/95 h-8 rounded-md px-4 text-xs transition-[background-color] duration-75 ease-linear">
+        <button
+          className="bg-purple-400 hover:not(:disabled):bg-purple-400/95 h-8 rounded-md px-4 text-xs transition-[background-color] duration-75 ease-linear disabled:opacity-50"
+          disabled={disabled}
+        >
           Execute
         </button>
       </DialogTrigger>

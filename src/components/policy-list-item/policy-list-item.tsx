@@ -45,13 +45,15 @@ export const PolicyListItem = ({ id, name }: PolicyListItemProps) => {
                 <MenuSeparator className="border-black-50" />
 
                 <MenuItem id="duplicate" asChild>
-                  <button className="py-2">Duplicate</button>
+                  <button className="w-full py-2 text-start">Duplicate</button>
                 </MenuItem>
 
                 <MenuSeparator className="border-black-50" />
 
                 <MenuItem id="new-tab" asChild>
-                  <button className="py-2">Open in new tab</button>
+                  <button className="w-full py-2 text-start">
+                    Open in new tab
+                  </button>
                 </MenuItem>
               </MenuContent>
             </MenuPositioner>

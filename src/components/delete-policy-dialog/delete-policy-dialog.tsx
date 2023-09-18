@@ -39,7 +39,7 @@ export const DeletePolicyDialog = ({ id }: DeletePolicyDialogProps) => {
       onClose={() => setIsOpen(false)}
     >
       <DialogTrigger asChild>
-        <button className="py-2">Delete</button>
+        <button className="w-full py-2 text-start">Delete</button>
       </DialogTrigger>
 
       <Portal>
@@ -47,11 +47,11 @@ export const DeletePolicyDialog = ({ id }: DeletePolicyDialogProps) => {
         <DialogContainer className="fixed inset-0 z-50 flex items-center justify-center">
           <DialogContent className="relative w-[95vw] max-w-max rounded-lg bg-black-400 p-5">
             <div>
-              <DialogTitle className="mb-2 flex items-center gap-1 font-medium">
+              <DialogTitle className="mb-5 flex items-center gap-1 font-medium">
                 Delete policy
               </DialogTitle>
 
-              <DialogDescription className="mb-6 text-white/75">
+              <DialogDescription className="mb-4 text-white/75">
                 Are you sure you want to delete this policy?
               </DialogDescription>
 
@@ -59,7 +59,7 @@ export const DeletePolicyDialog = ({ id }: DeletePolicyDialogProps) => {
                 <button
                   onClick={handleSubmit}
                   disabled={isLoading}
-                  className="bg-red-400 hover:bg-red-400/95 h-8 rounded-md px-4 text-xs font-medium transition-[background-color] duration-75 ease-linear disabled:cursor-not-allowed disabled:opacity-50"
+                  className="bg-red-400 hover:not(:disabled):bg-red-400/95 h-8 rounded-md px-4 text-xs font-medium transition-[background-color] duration-75 ease-linear disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   {isLoading ? 'Loading...' : 'Confirm'}
                 </button>

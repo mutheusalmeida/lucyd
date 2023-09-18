@@ -36,7 +36,9 @@ export const PolicyCrumb = () => {
         </EditableArea>
       </Editable>
 
-      <DecisionDialog />
+      <DecisionDialog
+        disabled={Boolean(data && data.if_statements.length === 0)}
+      />
     </div>
   )
 }

@@ -80,7 +80,7 @@ export const CreatePolicyDialog = () => {
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="bg-purple-400 hover:bg-purple-400/95 h-8 rounded-md px-4 text-xs transition-[background-color] duration-75 ease-linear disabled:cursor-not-allowed disabled:opacity-50"
+                  className="bg-purple-400 hover:not(:disabled):bg-purple-400/95 h-8 rounded-md px-4 text-xs transition-[background-color] duration-75 ease-linear disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   {isLoading ? 'Loading...' : 'Create'}
                 </button>
