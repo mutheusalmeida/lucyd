@@ -1,10 +1,11 @@
+import { Loading } from '@/components/loading'
 import { useGetPoliciesQuery } from '@/services/api'
 import { Link } from 'react-router-dom'
 
 export const Policies = () => {
   const { data, isLoading } = useGetPoliciesQuery()
 
-  if (isLoading) return <div>Loading...</div>
+  if (isLoading) return <Loading />
 
   return (
     <div className="grid grid-cols-[repeat(auto-fill,_minmax(176px,_1fr))] gap-3 p-5">

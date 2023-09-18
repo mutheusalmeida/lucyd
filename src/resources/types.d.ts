@@ -17,4 +17,8 @@ declare module 'policies' {
   type PolicyResponseType = {
     content: PolicyType[]
   }
+
+  type DecisionType = {
+    decision: boolean
+  }
 }

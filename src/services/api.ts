@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import type { PolicyResponseType, PolicyType } from 'policies'
+import type { DecisionType, PolicyResponseType, PolicyType } from 'policies'
 
 export const api = createApi({
   baseQuery: fetchBaseQuery({
@@ -24,8 +24,24 @@ export const api = createApi({
         }
       },
     }),
+    executePolicy: build.mutation<
+      DecisionType,
+      { id: string; body: Record<string, string> }
+    >({
+      query: ({ id, body }) => {
+        return {
+          url: `/policies/${id}/decision`,
+          method: 'POST',
+          body,
+        }
+      },
+    }),
   }),
 })
 
-export const { useGetPoliciesQuery, useGetPolicyQuery, useEditPolicyMutation } =
-  api
+export const {
+  useGetPoliciesQuery,
+  useGetPolicyQuery,
+  useEditPolicyMutation,
+  useExecutePolicyMutation,
+} = api

@@ -14,7 +14,7 @@ export const PolicyCrumb = () => {
   const { data, isLoading } = useGetPolicyQuery(policyId!)
   const [editPolicy] = useEditPolicyMutation()
 
-  if (isLoading) return <Loading />
+  if (isLoading) return <Loading className="p-0" />
 
   const handleSubmit = (value: string) => {
     editPolicy({ id: policyId!, body: { name: value } })

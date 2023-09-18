@@ -1,6 +1,12 @@
-export const Loading = () => {
+import { twMerge } from 'tailwind-merge'
+
+type LoadingProps = {
+  className?: string
+}
+
+export const Loading = ({ className }: LoadingProps) => {
   return (
-    <div className="p-5">
+    <div className={twMerge('p-5', className)}>
       <span>Loading...</span>
     </div>
   )

@@ -1,5 +1,6 @@
 import { Loading } from '@/components/loading'
 import { useGetPolicyQuery } from '@/services/api'
+import { Fragment } from 'react'
 import { useParams } from 'react-router-dom'
 
 const operators = {
@@ -29,12 +30,9 @@ export const PolicyItem = () => {
 
         {data?.if_statements.map(
           ({ id, value, variable, comparison_operator }, index, arr) => (
-            <>
+            <Fragment key={id}>
               <div className="relative flex items-center">
-                <div
-                  key={id}
-                  className="relative flex h-32 w-32 items-center justify-center bg-black-400"
-                >
+                <div className="relative flex h-32 w-32 items-center justify-center bg-black-400">
                   <div className="decision-shape absolute left-0 top-0 h-full w-full border border-black-100" />
 
                   <div className="z-10">
@@ -62,7 +60,7 @@ export const PolicyItem = () => {
                   decision = true
                 </div>
               )}
-            </>
+            </Fragment>
           )
         )}
       </div>

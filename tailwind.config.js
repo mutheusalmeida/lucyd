@@ -18,6 +18,12 @@ export default {
       purple: {
         400: '#9747ff',
       },
+      green: {
+        400: '#98D05B',
+      },
+      red: {
+        400: '#F3797D',
+      },
     }),
   },
   plugins: [],
