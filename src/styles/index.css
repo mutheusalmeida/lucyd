@@ -1,3 +1,28 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html,
+body,
+[data-js='root'] {
+  height: 100%;
+}
+
+body {
+  font-family: theme('fontFamily.primary');
+  background-color: theme('colors.black.400');
+  color: theme('colors.white');
+  -webkit-font-smoothing: antialiased;
+  font-size: 100%;
+}
+
+button {
+  @apply appearance-none;
+  @apply outline-none;
+  @apply cursor-default;
+}
+
+a {
+  @apply no-underline;
+  @apply cursor-default;
+}
