@@ -8,13 +8,15 @@ import {
   DialogTitle,
   DialogTrigger,
   Portal,
+  useToast,
 } from '@ark-ui/react'
 import { PlusIcon, XMarkIcon } from '@heroicons/react/24/solid'
 import { FormEvent, useState } from 'react'
 
 export const CreatePolicyDialog = () => {
-  const [createPolicy, { isLoading }] = useCreatePolicyMutation()
+  const [createPolicy, { isLoading, error }] = useCreatePolicyMutation()
   const [isOpen, setIsOpen] = useState(false)
+  const toast = useToast()
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -31,8 +33,15 @@ export const CreatePolicyDialog = () => {
       }).unwrap()
       setIsOpen(false)
       form.reset()
-    } catch (error) {
-      console.error('rejected', error)
+    } catch (err: unknown) {
+      if (error && 'data' in error) {
+        const { message } = error.data as { message: string }
+
+        toast.create({
+          title: 'Something went wrong',
+          description: message,
+        })
+      }
     }
   }
 
@@ -49,7 +58,7 @@ export const CreatePolicyDialog = () => {
       </DialogTrigger>
 
       <Portal>
-        <DialogBackdrop className="bg-black-900/50 fixed inset-0 z-40" />
+        <DialogBackdrop className="fixed inset-0 z-40 bg-black-900/50" />
         <DialogContainer className="fixed inset-0 z-50 flex items-center justify-center">
           <DialogContent className="relative w-[95vw] max-w-[320px] rounded-lg bg-black-400 p-5">
             <div>
@@ -78,7 +87,7 @@ export const CreatePolicyDialog = () => {
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="bg-purple-400 hover:not(:disabled):bg-purple-400/95 h-8 rounded-md px-4 text-xs transition-[background-color] duration-75 ease-linear disabled:cursor-not-allowed disabled:opacity-50"
+                  className="hover:not(:disabled):bg-purple-400/95 h-8 rounded-md bg-purple-400 px-4 text-xs transition-[background-color] duration-75 ease-linear disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   {isLoading ? 'Loading...' : 'Create'}
                 </button>

@@ -7,6 +7,7 @@ type ConnectorProps = {
   className?: string
   connected: boolean
   itemId: number
+  defaultValue: 'No' | 'Yes'
 }
 
 export const Connector = ({
@@ -15,6 +16,7 @@ export const Connector = ({
   dir,
   connected,
   itemId,
+  defaultValue,
 }: ConnectorProps) => {
   return (
     <div
@@ -29,6 +31,17 @@ export const Connector = ({
         dir === 'bottom' ? 'h-11 w-[1px]' : 'h-[1px] w-11'
       )}
     >
+      <div
+        className={twMerge(
+          'absolute text-xs',
+          dir === 'bottom'
+            ? 'right-[-4px] top-0 translate-x-[100%] translate-y-[100%]'
+            : 'right-0 top-[-2px] translate-x-[-100%] translate-y-[-100%]'
+        )}
+      >
+        {defaultValue}
+      </div>
+
       <div
         className={twMerge(
           'absolute h-2 w-2 rotate-[45deg] border border-black-100 bg-black-100',

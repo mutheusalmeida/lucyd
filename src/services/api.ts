@@ -94,11 +94,16 @@ export const api = createApi({
       IfStatementsType,
       { id: string; body: Partial<IfStatementsType> }
     >({
-      query: ({ body }) => ({
-        url: `/if_statements/${body.id}`,
-        method: 'PUT',
-        body,
-      }),
+      query: ({ body }) => {
+        const { id, ...data } = body
+
+        return {
+          url: `/if_statements/${id}`,
+          method: 'PUT',
+          body: data,
+        }
+      },
+      invalidatesTags: ['Policies'],
       async onQueryStarted(data, { dispatch, queryFulfilled }) {
         const patchResult = dispatch(
           api.util.updateQueryData('getPolicy', data.id, (draft) => {

@@ -46,7 +46,7 @@ export const Draggable = ({ children, type, value }: DraggableProps) => {
 
       if (connectorTop && connectorLeft) {
         const draggableAreaEle = nodes.find((item) => {
-          const draggableArea = item.children[0].getBoundingClientRect()
+          const draggableArea = item.children[1].getBoundingClientRect()
 
           return (
             (connectorTop?.left > draggableArea?.left - connectorTop?.width &&
@@ -116,7 +116,7 @@ export const Draggable = ({ children, type, value }: DraggableProps) => {
   return (
     <animated.div
       ref={ref}
-      className="relative z-50 touch-none"
+      className="relative touch-none"
       style={{ x, y, cursor }}
     >
       <div
