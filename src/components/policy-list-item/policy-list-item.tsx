@@ -31,7 +31,7 @@ export const PolicyListItem = ({ id, name }: PolicyListItemProps) => {
         <Menu>
           <MenuTrigger asChild>
             <button>
-              <EllipsisVerticalIcon className="h-5 w-5" />
+              <EllipsisVerticalIcon className="h-5 w-5 text-white/70 transition-[color] duration-75 ease-linear hover:text-white" />
             </button>
           </MenuTrigger>
 

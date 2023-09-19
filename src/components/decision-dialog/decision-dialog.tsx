@@ -36,10 +36,10 @@ export const DecisionDialog = ({ disabled }: DecisionDialogProps) => {
 
     const formData = policy?.if_statements
       .map(({ variable }) => {
-        const input = form[variable] as unknown as HTMLInputElement
+        const input = form[variable!] as unknown as HTMLInputElement
 
         return {
-          [variable]: input.value,
+          [variable!]: input.value,
         }
       })
       .reduce((acc, curr) => ({ ...acc, ...curr }), {})

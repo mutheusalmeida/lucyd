@@ -1,4 +1,4 @@
-import { useDeletePolicyMutation, useGetPoliciesQuery } from '@/services/api'
+import { useDeletePolicyMutation } from '@/services/api'
 import {
   Dialog,
   DialogBackdrop,
@@ -19,13 +19,11 @@ type DeletePolicyDialogProps = {
 
 export const DeletePolicyDialog = ({ id }: DeletePolicyDialogProps) => {
   const [deletePolicy, { isLoading }] = useDeletePolicyMutation()
-  const { refetch } = useGetPoliciesQuery()
   const [isOpen, setIsOpen] = useState(false)
 
   const handleSubmit = async () => {
     try {
       await deletePolicy({ id }).unwrap()
-      refetch()
       setIsOpen(false)
     } catch (error) {
       console.error('rejected', error)

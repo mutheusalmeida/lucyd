@@ -1,3 +1,5 @@
+import { Connector } from '@/components/connector'
+import { Draggable } from '@/components/draggable'
 import { Loading } from '@/components/loading'
 import { useGetPolicyQuery } from '@/services/api'
 import { Fragment } from 'react'
@@ -12,57 +14,103 @@ const operators = {
 }
 
 export const PolicyItem = () => {
-  const { policyId } = useParams()
+  const { policyId } = useParams<{ policyId: string }>()
   const { data, isLoading } = useGetPolicyQuery(policyId!)
 
   if (isLoading) return <Loading />
 
   return (
-    <div className="grid h-full place-items-center">
+    <div className="grid h-full grid-cols-[1fr_max-content] place-items-center">
       <div className="flex flex-col place-items-center text-sm">
         <div className="rounded-lg border border-black-100 bg-black-400 px-6 py-3 uppercase">
           Start
         </div>
 
-        <div className="relative h-11 w-[1px] bg-black-100">
-          <div className="absolute bottom-0 left-[50%] h-2 w-2 translate-x-[-50%] translate-y-full rotate-[45deg] border border-black-100 bg-black-100" />
-        </div>
+        <Connector
+          connected={Boolean(data && data.if_statements.length > 0)}
+          dir="bottom"
+          itemId={0}
+          type="decision"
+        />
 
         {data?.if_statements.map(
-          ({ id, value, variable, comparison_operator }, index, arr) => (
+          (
+            {
+              id,
+              value,
+              variable,
+              else_block,
+              then_block,
+              comparison_operator,
+            },
+            index,
+            arr
+          ) => (
             <Fragment key={id}>
               <div className="relative flex items-center">
-                <div className="relative flex h-32 w-32 items-center justify-center bg-black-400">
-                  <div className="decision-shape absolute left-0 top-0 h-full w-full border border-black-100" />
+                <div className="relative flex h-32 w-32 items-center justify-center">
+                  <div className="decision-shape absolute left-0 top-0 h-full w-full border border-black-100 bg-black-400" />
 
                   <div className="z-10">
-                    {variable} {operators[comparison_operator]} {value}
+                    {variable}{' '}
+                    {comparison_operator && operators[comparison_operator]}{' '}
+                    {value}
                   </div>
                 </div>
 
-                <div className="absolute right-[calc(-197px_-_((181px_-_128px)_/_2))] top-[50%] flex translate-y-[-50%] items-center">
-                  <div className="relative h-[1px] w-11 bg-black-100">
-                    <div className="absolute right-0 top-[50%] h-2 w-2 translate-x-full translate-y-[-50%] rotate-[45deg] border border-black-100 bg-black-100" />
-                  </div>
+                <div className="absolute right-[calc(0px_-_((181px_-_128px)_/_2))] top-[50%] flex translate-x-[100%] translate-y-[-50%] items-center">
+                  <Connector
+                    itemId={id}
+                    connected={Boolean(else_block)}
+                    dir="right"
+                    type="end"
+                  />
 
-                  <div className="z-10 rounded-lg border border-black-100 bg-black-400 px-6 py-3">
-                    decision = false
-                  </div>
+                  {else_block && (
+                    <div className="z-10 whitespace-nowrap rounded-lg border border-black-100 bg-black-400 px-6 py-3">
+                      decision = {else_block}
+                    </div>
+                  )}
                 </div>
               </div>
 
-              <div className="relative h-11 w-[1px] bg-black-100">
-                <div className="absolute bottom-0 left-[50%] h-2 w-2 translate-x-[-50%] translate-y-full rotate-[45deg] border border-black-100 bg-black-100" />
-              </div>
+              <Connector
+                itemId={id}
+                connected={Boolean(then_block)}
+                dir="bottom"
+                type="decision"
+              />
 
-              {arr.length - 1 === index && (
+              {arr.length - 1 === index && then_block && (
                 <div className="z-10 rounded-lg border border-black-100 bg-black-400 px-6 py-3">
-                  decision = true
+                  decision = {then_block}
                 </div>
               )}
             </Fragment>
           )
         )}
+      </div>
+
+      <div className="z-10 flex h-full flex-col items-center gap-3 border-l border-black-100 bg-black-400 px-3 py-5">
+        <Draggable type="decision">
+          <div className="relative flex h-32 w-32 items-center justify-center">
+            <div className="decision-shape absolute left-0 top-0 z-10 h-full w-full border border-black-100 bg-black-400" />
+
+            <div className="z-20">variable {'>'} value</div>
+          </div>
+        </Draggable>
+
+        <Draggable type="end" value="false">
+          <div className="z-10 rounded-lg border border-black-100 bg-black-400 px-6 py-3">
+            decision = false
+          </div>
+        </Draggable>
+
+        <Draggable type="end" value="true">
+          <div className="z-10 rounded-lg border border-black-100 bg-black-400 px-6 py-3">
+            decision = true
+          </div>
+        </Draggable>
       </div>
     </div>
   )

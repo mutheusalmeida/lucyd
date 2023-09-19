@@ -1,4 +1,4 @@
-import { useCreatePolicyMutation, useGetPoliciesQuery } from '@/services/api'
+import { useCreatePolicyMutation } from '@/services/api'
 import {
   Dialog,
   DialogBackdrop,
@@ -14,7 +14,6 @@ import { FormEvent, useState } from 'react'
 
 export const CreatePolicyDialog = () => {
   const [createPolicy, { isLoading }] = useCreatePolicyMutation()
-  const { refetch } = useGetPoliciesQuery()
   const [isOpen, setIsOpen] = useState(false)
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -30,7 +29,6 @@ export const CreatePolicyDialog = () => {
           name: input.value,
         },
       }).unwrap()
-      refetch()
       setIsOpen(false)
       form.reset()
     } catch (error) {
@@ -46,7 +44,7 @@ export const CreatePolicyDialog = () => {
     >
       <DialogTrigger asChild>
         <button className="flex h-full w-full items-center justify-center">
-          <PlusIcon className="h-10 w-10 text-white/70" />
+          <PlusIcon className="h-10 w-10 text-white/30" />
         </button>
       </DialogTrigger>
 

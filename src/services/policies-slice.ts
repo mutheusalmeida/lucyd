@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { PolicyType } from 'policies'
+import type { PolicyType } from 'policies'
 import { api } from './api'
 import { RootState } from './store'
 

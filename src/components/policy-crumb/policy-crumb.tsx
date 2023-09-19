@@ -10,7 +10,7 @@ import { DecisionDialog } from '../decision-dialog'
 import { Loading } from '../loading'
 
 export const PolicyCrumb = () => {
-  const { policyId } = useParams()
+  const { policyId } = useParams<{ policyId: string }>()
   const { data, isLoading } = useGetPolicyQuery(policyId!)
   const [editPolicy] = useEditPolicyMutation()
 
